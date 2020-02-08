@@ -1,0 +1,25 @@
+<div >
+        <h1 class="title">User info</h1>
+         <% if @user.errors.any? %>
+               <p>errors</p>
+              <div class="alert-warning">
+                <ul>
+                  <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+           <% end %>
+          <%= form_for(@user) do |f| %>
+ 
+          <p class="box">Name</p>
+          <%= f.text_field :name %>
+ 
+          <p class="box">image</p>
+          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %>
+          <p class="box">introduction</p>
+          <%= f.text_area :introduction %>
+          <br>
+          <%= f.submit 'Update User' %>
+ 
+           <% end %>
