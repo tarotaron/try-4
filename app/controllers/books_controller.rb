@@ -12,7 +12,8 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     @book = Book.find(params[:id])
     @user = @book.user
     @users = current_user
-
+    @book_comment = BookComment.new
+    @favorite = Favorite.new
   end
   def create
     @book = Book.new(book_params)
@@ -21,12 +22,10 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     if @book.save
        flash[:notice] = "You have creatad book successfully."
        redirect_to book_path(@book)
-
     else
       @books = Book.all
       @user = current_user
       render 'index'
-
     end
 
   end
@@ -47,7 +46,7 @@ before_action :correct_user, only: [:edit, :update, :destroy]
     end
   end
    
-   def destroy 
+   def destroy
         book = Book.find(params[:id])
         book.destroy
         redirect_to books_path
