@@ -10,9 +10,7 @@ before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
-    @user = @book.user
-    @users = current_user
-    @book_comment = BookComment.new
+    @comment = BookComment.new
     @favorite = Favorite.new
   end
   def create
@@ -47,9 +45,9 @@ before_action :correct_user, only: [:edit, :update, :destroy]
   end
    
    def destroy
-        book = Book.find(params[:id])
-        book.destroy
-        redirect_to books_path
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path
   end
 
   private
