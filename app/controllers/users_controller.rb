@@ -28,8 +28,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
-
   end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
+  def followings
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
    private
   def user_params
     params.require(:user).permit(:name, :profile_image)

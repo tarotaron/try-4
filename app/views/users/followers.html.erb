@@ -1,0 +1,40 @@
+<h1>Follower Users</h1>
+   <table class="table">
+      <tr>
+        <th>image</th>
+        <th>name</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    <% @users.each do |user| %>
+     <tr>
+      <td>
+        <%= attachment_image_tag user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg", size:'40x40'%>
+      </td>
+      <td>
+      <%= user.name%>
+      </td>
+      <td>
+      フォロー数:<%= user.followings.count %>
+      </td>
+      <td>
+      フォロワー数:<%= user.followers.count %>
+      </td>
+      <td>
+        <% if current_user != user %>
+          <% if user.followed_by?(current_user)%>
+            <%= link_to"フォロー済",user_relationships_path(user),method: :delete %>
+          <% else %>
+            <%= link_to"フォロー", user_relationships_path(user),method: :post %>
+          <% end %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to"show",user_path(user) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
