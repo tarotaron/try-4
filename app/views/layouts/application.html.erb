@@ -49,10 +49,25 @@
               </div>
     </nav>
     <div class="main">
+        <% if user_signed_in? %>
+            <div class="form-inline">
+              <%= form_with(url: search_path, method: :get, local: true) do |f| %>
+                <div class="form-group">
+                  <%= f.text_field 'content' %>
+                </div>
+                <div class="form-group">
+                  <%= f.select 'model',options_for_select({user: 'user',book: 'book'}, 'user') %>
+                </div>
+                <div class="form-group">
+                  <%= f.select 'how',options_for_select({完全一致: 'match', 前方一致: 'forward', 後方一致: 'backward', 部分一致: 'partical'}, 'match') %>
+                </div>
+                  <%= f.submit '検索', class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
       <%= yield %>
-</div>
-     </div>  
-      <footer class="text-right">CopyRight Infratop.inc</footer>
+     </div>
+      <footer class="text-right">CopyRight Infratop.inc></footer>
     </body>
 </html>
 
